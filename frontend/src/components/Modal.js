@@ -77,7 +77,7 @@ export default class CustomModal extends Component {
         <ModalFooter>
           <Button
             color="success"
-            onClick={() => onSave(this.state.activeItem)}
+            onClick={() => {console.log(this.state.activeItem); onSave(this.state.activeItem);}}
           >
             Save
           </Button>
