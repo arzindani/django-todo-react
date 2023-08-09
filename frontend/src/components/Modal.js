@@ -40,10 +40,9 @@ export default class CustomModal extends Component {
         <ModalBody>
           <Form>
             <FormGroup>
-              <Label for="todo-title">Title</Label>
+              <Label for="title">Title</Label>
               <Input
                 type="text"
-                id="todo-title"
                 name="title"
                 value={this.state.activeItem.title}
                 onChange={this.handleChange}
@@ -51,10 +50,9 @@ export default class CustomModal extends Component {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="todo-description">Description</Label>
+              <Label for="description">Description</Label>
               <Input
                 type="text"
-                id="todo-description"
                 name="description"
                 value={this.state.activeItem.description}
                 onChange={this.handleChange}
@@ -62,7 +60,7 @@ export default class CustomModal extends Component {
               />
             </FormGroup>
             <FormGroup check>
-              <Label check>
+              <Label for="completed">
                 <Input
                   type="checkbox"
                   name="completed"
@@ -77,7 +75,7 @@ export default class CustomModal extends Component {
         <ModalFooter>
           <Button
             color="success"
-            onClick={() => {console.log(this.state.activeItem); onSave(this.state.activeItem);}}
+            onClick={() => onSave(this.state.activeItem)}
           >
             Save
           </Button>
