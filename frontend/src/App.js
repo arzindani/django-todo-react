@@ -6,13 +6,18 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      viewCompleted: false,
+      viewTab: 0,
       todoList: [],
       modal: false,
       activeItem: {
         title: "",
+        label: "",
+        category: "",
         description: "",
+        start_date: "",
+        end_date: "",
         completed: false,
+        archived: false,
       },
     };
   }
@@ -53,7 +58,14 @@ class App extends Component {
   };
 
   createItem = () => {
-    const item = { title: "", description: "", completed: false };
+    const item = { title: "",
+    label: "",
+    category: "",
+    description: "",
+    start_date: "",
+    end_date: "",
+    completed: false,
+    archived: false, };
 
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
@@ -62,37 +74,52 @@ class App extends Component {
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
 
-  displayCompleted = (status) => {
+  displayTab = (status) => {
     if (status) {
-      return this.setState({ viewCompleted: true });
+      return this.setState({ viewTab: status });
     }
-
-    return this.setState({ viewCompleted: false });
   };
 
   renderTabList = () => {
     return (
       <div className="nav nav-tabs">
         <span
-          onClick={() => this.displayCompleted(true)}
-          className={this.state.viewCompleted ? "nav-link active" : "nav-link"}
+          onClick={() => this.displayTab(1)}
+          className={this.state.viewTab === 1 ? "nav-link active" : "nav-link"}
+        >
+          Incomplete
+        </span>
+        <span
+          onClick={() => this.displayTab(2)}
+          className={this.state.viewTab === 2 ? "nav-link active" : "nav-link"}
         >
           Complete
         </span>
         <span
-          onClick={() => this.displayCompleted(false)}
-          className={this.state.viewCompleted ? "nav-link" : "nav-link active"}
+          onClick={() => this.displayTab(3)}
+          className={this.state.viewTab === 3 ? "nav-link active" : "nav-link"}
         >
-          Incomplete
+          Archived
         </span>
       </div>
     );
   };
 
   renderItems = () => {
-    const { viewCompleted } = this.state;
+    const { viewTab } = this.state;
     const newItems = this.state.todoList.filter(
-      (item) => item.completed === viewCompleted
+      (item) => {
+        switch (viewTab) {
+          case 1:
+            return( item.completed === false && item.archived === false )
+          case 2:
+            return( item.completed === true )
+          case 3:
+            return( item.archived === true )
+          default:
+            return( item.completed === false && item.archived === false )
+        }
+      }
     );
 
     return newItems.map((item) => (
@@ -101,9 +128,7 @@ class App extends Component {
         className="list-group-item d-flex justify-content-between align-items-center"
       >
         <span
-          className={`todo-title mr-2 ${
-            this.state.viewCompleted ? "completed-todo" : ""
-          }`}
+          className={"todo-title mr-2" + (item.completed ? " completed" : "")}
           title={item.description}
         >
           {item.title}
