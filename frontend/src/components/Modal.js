@@ -79,6 +79,26 @@ export default class CustomModal extends Component {
                 placeholder="Enter Todo description"
               />
             </FormGroup>
+            <FormGroup>
+              <Label for="start_date">Start Date</Label>
+              <Input
+                type="date"
+                name="start_date"
+                value={this.state.activeItem.start_date}
+                onChange={this.handleChange}
+                placeholder="Enter Todo start_date"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="end_date">End Date</Label>
+              <Input
+                type="date"
+                name="end_date"
+                value={this.state.activeItem.end_date}
+                onChange={this.handleChange}
+                placeholder="Enter Todo end_date"
+              />
+            </FormGroup>
             <FormGroup check>
               <Label for="completed">
                 <Input
