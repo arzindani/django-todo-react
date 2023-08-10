@@ -50,6 +50,26 @@ export default class CustomModal extends Component {
               />
             </FormGroup>
             <FormGroup>
+              <Label for="label">Label</Label>
+              <Input
+                type="text"
+                name="label"
+                value={this.state.activeItem.label}
+                onChange={this.handleChange}
+                placeholder="Enter Todo label"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="category">Category</Label>
+              <Input
+                type="text"
+                name="category"
+                value={this.state.activeItem.category}
+                onChange={this.handleChange}
+                placeholder="Enter Todo category"
+              />
+            </FormGroup>
+            <FormGroup>
               <Label for="description">Description</Label>
               <Input
                 type="text"
@@ -68,6 +88,17 @@ export default class CustomModal extends Component {
                   onChange={this.handleChange}
                 />
                 Completed
+              </Label>
+            </FormGroup>
+            <FormGroup check>
+              <Label for="archived">
+                <Input
+                  type="checkbox"
+                  name="archived"
+                  checked={this.state.activeItem.archived}
+                  onChange={this.handleChange}
+                />
+                Archived
               </Label>
             </FormGroup>
           </Form>
