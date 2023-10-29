@@ -14,8 +14,6 @@ class App extends Component {
         label: "",
         category: "",
         description: "",
-        start_date: "",
-        end_date: "",
         completed: false,
         archived: false,
       },
@@ -40,6 +38,8 @@ class App extends Component {
   handleSubmit = (item) => {
     this.toggle();
 
+    console.log(item);
+
     if (item.id) {
       axios
         .put(`http://localhost:8000/api/todos/${item.id}/`, item)
@@ -58,15 +58,14 @@ class App extends Component {
   };
 
   createItem = () => {
-    const item = { title: "",
-    label: "",
-    category: "",
-    description: "",
-    start_date: "",
-    end_date: "",
-    completed: false,
-    archived: false, };
-
+    const item = {
+      title: "",
+      label: "",
+      description: "",
+      category: "",
+      archived: false,
+      completed: false,
+    };
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
 
